@@ -24,4 +24,4 @@ else
 end
 
 # The list of plugins and their respective file locations
-default["ohai"]["plugins"]["ohai"] = "plugins"
+default["ohai"]["plugins"]["vagrant-ohai-plugin"] = "plugins"
