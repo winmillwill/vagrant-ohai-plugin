@@ -1,12 +1,12 @@
-name             "ohai"
-maintainer       "Opscode, Inc"
-maintainer_email "cookbooks@opscode.com"
+name             "vagrant-ohai-plugin"
+maintainer       "Tim Brown"
+maintainer_email "tpbrown@gmail.com"
 license          "Apache 2.0"
-description      "Distributes a directory of custom ohai plugins"
+description      "Ohai plugin that detects Vagrant"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "1.1.10"
+version          "0.1.1"
 
-recipe "ohai::default", "Distributes a directory of custom ohai plugins"
+recipe "vagrant-ohai-plugin::default", "Installs the Vagrant ohai plugin"
 
 attribute "ohai/plugin_path",
   :display_name => "Ohai Plugin Path",
