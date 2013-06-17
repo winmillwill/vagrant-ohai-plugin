@@ -1,7 +1,7 @@
 Description
 ===========
 
-Creates a configured plugin path for distributing custom Ohai plugins, and reloads them via Ohai within the context of a Chef Client run during the compile phase (if needed).
+Creates a configured plugin path for distributing the Vagrant Ohai plugin, and loads it via Ohai within the context of a Chef Client run during the compile phase (if needed).
 
 Attributes
 ==========
@@ -15,7 +15,7 @@ Neither an FHS location or the default value of this attribute are in the defaul
 Usage
 =====
 
-Put the recipe `ohai` at the start of the node's run list to make sure that custom plugins are loaded early on in the Chef run and data is available for later recipes.
+Put the recipe `vagrant-ohai-plugin` at the start of the node's run list to make sure that custom plugins are loaded early on in the Chef run and data is available for later recipes.
 
 The execution of the custom plugins occurs within the recipe during the compile phase, so you can write new plugins and use the data they return in your Chef recipes.
 
@@ -28,18 +28,13 @@ http://wiki.opscode.com/display/chef/Writing+Ohai+Plugins
 * The "`Ohai::Config[:plugin_path]`" config setting has *NOT* been properly set in the Chef config file
 * The "`Ohai::Config[:plugin_path]`" config setting has been properly set in the Chef config file and there are updated plugins dropped off at "`node['ohai']['plugin_path']`".
 
-Example
-=======
-For an example implementation, inspect the ohai_plugin.rb
-recipe in the nginx community cookbook.
 
 License and Author
 ==================
 
-Author:: Joshua Timberman (<joshua@opscode.com>)
-Author:: Seth Chisamore (<schisamo@opscode.com>)
+Author:: Tim Brown (<tpbrown@gmail.com>) 
 
-Copyright:: 2010-2011, Opscode, Inc
+Based off https://gist.github.com/2050259 and http://johntdyer.com/blog/2013/01/25/ohai/
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
