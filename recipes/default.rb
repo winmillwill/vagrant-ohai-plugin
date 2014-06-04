@@ -15,40 +15,4 @@
 # limitations under the License.
 #
 
-unless Ohai::Config[:plugin_path].include?(node['ohai']['plugin_path'])
-  Ohai::Config[:plugin_path] << node['ohai']['plugin_path']
-end
-Chef::Log.info("ohai plugins will be at: #{node['ohai']['plugin_path']}")
-
-# This is done during the compile phase so new plugins can be used in
-# resources later in the run.
-reload_ohai = false
-Chef::Log.debug("ohai plugins: #{node['ohai']['plugins']}")
-node['ohai']['plugins'].each_pair do |source_cookbook, path|
-
-  rd = remote_directory node['ohai']['plugin_path'] do
-    cookbook source_cookbook
-    source path
-    # source 'vagrant-net'
-    mode '0755' unless platform_family?('windows')
-    recursive true
-    purge false
-    action :nothing
-  end
-
-  rd.run_action(:create)
-  reload_ohai ||= rd.updated?
-
-end
-
-resource = ohai 'custom_plugins' do
-  action :nothing
-end
-
-# only reload ohai if new plugins were dropped off OR
-# node['ohai']['plugin_path'] does not exists in client.rb
-if reload_ohai ||
-  !(::IO.read(Chef::Config[:config_file]) =~ /Ohai::Config\[:plugin_path\]\s*<<\s*["']#{node['ohai']['plugin_path']}["']/)
-
-  resource.run_action(:reload)
-end
+include_recipe 'ohai'
