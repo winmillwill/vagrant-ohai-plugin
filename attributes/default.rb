@@ -14,14 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-# FHS location would be /var/lib/chef/ohai_plugins or similar.
-case node["platform_family"]
-when "windows"
-	default["ohai"]["plugin_path"] = "C:/chef/ohai_plugins"
-else
-	default["ohai"]["plugin_path"] = "/etc/chef/ohai_plugins"
-end
-
-# The list of plugins and their respective file locations
-default["ohai"]["plugins"]["vagrant-ohai-plugin"] = "plugins"
+default["ohai"]["plugins"]["vagrant-ohai-plugin"] = "vagrant"
